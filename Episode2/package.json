@@ -1,0 +1,17 @@
+{ 
+  "name": "praveen-learning-reactjs",
+  "version": "1.0.0",
+  "description": "learning about reactjs from akshay saini from his paid course namaste react",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "praveen reddy irala",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.15.2"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}
