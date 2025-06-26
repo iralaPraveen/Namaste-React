@@ -1,0 +1,51 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+.logo{
+    width: 100px;
+}
+.nav-items ul{
+    display: flex;
+}
+.nav-items >ul >li {
+    padding: 10px;
+    margin: 10px;
+    font-size: 25px;
+    list-style: none;
+
+}
+.search{
+    padding: 10px;
+}
+.restuarant-card{
+    width: 200px;
+    height: 400px;
+    background-color: aqua;
+    border: 1px solid black;
+}
+.restuarant-logo{
+    width: 100%;
+    
+}
+.restuarant-container{
+    display: flex;
+    flex-wrap :wrap;
+    gap: 10px;
+}
+.filter{
+    display: flex;
+}
+restuarant-card-shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.restuarant-card-shimmer{
+    background-color: rgb(86, 148, 60);
+     width: 200px;
+    height: 400px;
+    margin: 20px;
+    
+    
+}
