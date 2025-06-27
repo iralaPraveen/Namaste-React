@@ -1,5 +1,4 @@
 import RestuarantCard from "./RestuarantCard";
-import resList from "../src/utils/mockData";
 import { useState, useEffect } from "react";
 import { SWIGGY_API_URL } from "../src/utils/constants";
 
@@ -10,7 +9,7 @@ const Body = () => {
   console.log("Body Mounted");
 
   useEffect(() => {
-    console.log("useEffect is trigerred");
+    console.log("useEffect is triggered");
     getRestuarants();
   }, []);
 
@@ -18,15 +17,28 @@ const Body = () => {
     try {
       const data = await fetch(SWIGGY_API_URL);
       const json = await data.json();
-      const name =
-        json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants?.[0]?.info?.name;
-      console.log("Fetched Name:", name);
-      // console.log("Data is", json);
+
+      // Log the response structure (optional, helpful for debugging)
+      // console.log("Full API Response:", JSON.stringify(json, null, 2));
+
+      // Dynamically find the card that contains restaurant data
+      const restaurantCard = json?.data?.cards?.find(
+        (card) =>
+          card?.card?.card?.gridElements?.infoWithStyle?.restaurants !==
+          undefined
+      );
+
       const restaurants =
-        json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants;
-      console.log("restuarants", restaurants);
+        restaurantCard?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+
+      if (!Array.isArray(restaurants)) {
+        console.error("Restaurants not found or is not an array:", restaurants);
+        return;
+      }
+
+      console.log("Fetched Name:", restaurants?.[0]?.info?.name);
+      console.log("restaurants", restaurants);
+
       const extractedDetails = restaurants.map((restaurant) => {
         const { cloudinaryImageId, name, locality, areaName, avgRating } =
           restaurant.info;
@@ -34,8 +46,7 @@ const Body = () => {
       });
 
       console.log(extractedDetails);
-      setRes(extractedDetails); // These line felt something confusion later on understood 
-      //These returns map of the objects array
+      setRes(extractedDetails);
     } catch (error) {
       console.error("Error fetching restaurants:", error);
     }
@@ -51,39 +62,33 @@ const Body = () => {
   return (
     <div className="body">
       <div className="filter">
-        <div className="filter">
-          <div className="search">
-            <input
-              type="text"
-              className="search-box"
-              value={searchText}
-              onChange={(e) => {
-                setSearchText(e.target.value);
-              }}
-            />
-
-            <button onClick={handleSearch}>Search</button>
-          </div>
+        <div className="search">
+          <input
+            type="text"
+            className="search-box"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button onClick={handleSearch}>Search</button>
         </div>
         <button
           className="filter-btn"
           onClick={() => {
             const filteredData = res.filter((res) => res.avgRating > 4.0);
             setRes(filteredData);
-            {
-              /*console.log(resList);*/
-            }
           }}
         >
-          Click to Restuarnt to see above 4 rating
+          Click to Restaurant to see above 4 rating
         </button>
       </div>
+
       <div className="restuarant-container">
-        {res.map((restuarant, index) => {
-          console.log("These is from body", restuarant);
-          return <RestuarantCard key={index} {...restuarant} />;
+        {res.map((restaurant, index) => {
+          console.log("This is from body", restaurant);
+          return <RestuarantCard key={index} {...restaurant} />;
         })}
-        {/*<RestuarantCard name="Teja&Hari" cusine="West India" />*/}
       </div>
     </div>
   );
