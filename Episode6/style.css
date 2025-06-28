@@ -37,3 +37,15 @@
 .filter{
     display: flex;
 }
+restuarant-card-shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.restuarant-card-shimmer{
+    background-color: rgb(86, 148, 60);
+     width: 200px;
+    height: 400px;
+    margin: 20px;
+    
+    
+}
