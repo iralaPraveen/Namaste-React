@@ -1,0 +1,23 @@
+#root {
+  background-color: rgb(243, 243, 243);
+}
+.box {
+  border: 2px solid blue;
+  margin-bottom: 10px;
+}
+#header-items > ul {
+  display: flex;
+  list-style: none;
+  font-size: xx-large;
+  gap: 20px;
+  justify-content: flex-end; /* 👈 Pushes list items to the right */
+  padding: 0;
+  margin: 0;
+}
+#search-box{
+  width: 400px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
